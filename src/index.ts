@@ -5,7 +5,7 @@ const fastify = Fastify({
   logger: true
 })
 
-fastify.get('/', async (request, reply) => {
+fastify.get('/*', async (request, reply) => {
     reply.send('Hello, this is helper.senaev.com service')
 })
 
@@ -23,11 +23,10 @@ fastify.post('/tg', async (request, reply) => {
 })
 
 const PORT = 3000
-fastify.listen({ port: PORT }, async (err, address) => {
-  if (err) {
-    throw err
-  }
-
+// required in Docker so the app accepts connections from the host
+const HOST = '0.0.0.0'
+fastify.listen({ port: PORT, host: HOST }, (err) => {
+  if (err) throw err
   console.log(`🚀 Server is running on port=[${PORT}]`)
 })
 
