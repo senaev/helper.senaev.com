@@ -9,7 +9,7 @@ fastify.get('/*', async (request, reply) => {
     reply.send('Hello, this is helper.senaev.com service')
 })
 
-// curl -X POST http://localhost:3000/tg -H "Content-Type: text/plain" -d 'Hello, world!'
+// curl -X POST http://localhost/tg -H "Content-Type: text/plain" -d 'Hello, world!'
 fastify.post('/tg', async (request, reply) => {
     const message = request.body as string
 
@@ -22,7 +22,7 @@ fastify.post('/tg', async (request, reply) => {
     reply.send({ status: 'ok' })
 })
 
-const PORT = 3000
+const PORT = 80
 // required in Docker so the app accepts connections from the host
 const HOST = '0.0.0.0'
 fastify.listen({ port: PORT, host: HOST }, (err) => {
